@@ -75,23 +75,29 @@ https://rarrdeguzman.github.io/dasherBike/
   <label>Estimated Time (min):</label>
   <input type="number" inputmode="numeric" id="time" placeholder="e.g. 15">
 
+  <!-- Add this new label and input under Offer Pay -->
+  <label>Tip ($):</label>
+  <input type="number" inputmode="numeric" id="tip" placeholder="e.g. 2">
+
   <button onclick="checkWorthIt()">Is it worth it?</button>
 
   <div id="result"></div>
 
   <script>
     function checkWorthIt() {
-      const pay = parseFloat(document.getElementById("pay").value);
+      const pay = parseFloat(document.getElementById("pay").value) || 0;
+      const tip = parseFloat(document.getElementById("tip").value) || 0;
       const distance = parseFloat(document.getElementById("distance").value);
       const time = parseFloat(document.getElementById("time").value);
 
-      const payPerKm = pay / distance;
-      const hourlyRate = (pay / time) * 60;
+      const totalPay = pay + tip;
+      const payPerKm = totalPay / distance;
+      const hourlyRate = (totalPay / time) * 60;
 
       let message = "";
 
-      if (pay < 5) {
-        message += "Too low pay. ";
+      if (totalPay < 5) {
+        message += "Too low pay (even with tip). ";
       }
       if (distance > 3) {
         message += "Too far for a bike. ";
