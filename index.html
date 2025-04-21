@@ -85,10 +85,19 @@ https://rarrdeguzman.github.io/dasherBike/
 
   <script>
     function checkWorthIt() {
-      const pay = parseFloat(document.getElementById("pay").value) || 0;
+      const payInput = document.getElementById("pay").value;
+      const distanceInput = document.getElementById("distance").value;
+      const timeInput = document.getElementById("time").value;
+
+      if (payInput === "" || distanceInput === "" || timeInput === "") {
+        document.getElementById("result").textContent = "Please fill in Offer Pay, Distance, and Estimated Time.";
+        return;
+      }
+
+      const pay = parseFloat(payInput);
       const tip = parseFloat(document.getElementById("tip").value) || 0;
-      const distance = parseFloat(document.getElementById("distance").value);
-      const time = parseFloat(document.getElementById("time").value);
+      const distance = parseFloat(distanceInput);
+      const time = parseFloat(timeInput);
 
       const totalPay = pay + tip;
       const payPerKm = totalPay / distance;
